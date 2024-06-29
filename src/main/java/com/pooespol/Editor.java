@@ -1,4 +1,4 @@
-package com.pooespol.Persona;
+package com.pooespol;
 
 public class Editor {
     

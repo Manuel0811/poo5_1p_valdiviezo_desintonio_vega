@@ -1,4 +1,4 @@
-package com.pooespol.Persona;
+package com.pooespol;
 
 public class Autor extends Persona{
     private static int CODIGOID;
@@ -9,6 +9,7 @@ public class Autor extends Persona{
         super(nombre,apellido,correo);
         this.institucion = institucion;
         this.campoInvestigacion = campoInvestigacion;
+        CODIGOID++;
     }
 
     public String getInstitucion(){
