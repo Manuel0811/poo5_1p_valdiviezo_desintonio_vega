@@ -4,11 +4,13 @@ public abstract class Persona {
     protected String nombre;
     protected String apellido;
     protected String correo;
+    protected Usuario rol;
 
-    public Persona(String nombre, String apellido, String correo){
+    public Persona(String nombre, String apellido, String correo, Usuario rol){
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
+        this.rol = rol;
     }
 
     public String getNombre(){
@@ -23,6 +25,10 @@ public abstract class Persona {
         return correo;
     }
 
+    public Usuario getRol(){
+        return rol;
+    }
+
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
@@ -33,6 +39,10 @@ public abstract class Persona {
 
     public void setCorreo(String correo){
         this.correo = correo;
+    }
+
+    public void setRol(Usuario rol){
+        this.rol = rol;
     }
 
 

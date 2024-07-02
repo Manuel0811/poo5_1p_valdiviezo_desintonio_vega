@@ -1,16 +1,18 @@
 package com.pooespol;
 
 public class Revisor extends Persona{
-    private String nombreJournal;
-    private String contrasenia;
-    //private Usuario rol;
+    private String especialidad;
     private String user;
+    private String contrasenia;
+    private int articulosRevisados;
+    
 
-    public Revisor(String nombre, String apellido, String correo, String nombreJournal, String contrasenia, String user){
-        super(nombre, apellido,correo);
-        this.nombreJournal = nombreJournal;
-        this.contrasenia = contrasenia;
+    public Revisor(String nombre, String apellido, String correo, Usuario rol, String especialidad, String user,String contrasenia, int articulosRevisados ){
+        super(nombre, apellido,correo,rol);
+        this.especialidad = especialidad;
         this.user = user;
+        this.contrasenia = contrasenia;
+        this.articulosRevisados = articulosRevisados;
     }
 
     //Getters

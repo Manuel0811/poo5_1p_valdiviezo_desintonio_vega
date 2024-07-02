@@ -1,5 +1,5 @@
 package com.pooespol;
 
-public class Editor {
+public class Editor extends Persona{
     
 }
