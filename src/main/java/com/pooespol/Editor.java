@@ -2,8 +2,7 @@ package com.pooespol;
 
 public class Editor extends Persona{
     protected String journal;
-    private String contrasena;
-    protected usuario rol;
+    private String contrasenia;
     protected String user;
 
     public editor(String nombre, String apellido, String correo, String journal, String contrasena, String user, usuario rol) {

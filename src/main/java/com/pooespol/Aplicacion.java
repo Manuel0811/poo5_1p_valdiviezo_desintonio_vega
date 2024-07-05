@@ -13,6 +13,37 @@ import java.util.Scanner;
 public class Aplicacion {
     public static ArrayList<Persona> personas;
     
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        //agregarPersonas(usuarios.txt);
+        int opcion = 0;
+        do{
+            System.out.println("Someter Articulo: 1 \n Iniciar Sesion: 2 \n Salir: 3 \n Escriba la opcion que desea realizar:");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    someterArticulo();
+                    break;
+                case 2:
+                    System.out.println("Ingrese su User: ");
+                    String user = sc.nextLine();
+                    System.out.println("Ingrese su contraseña: ");
+                    String contrasenia = sc.nextLine();
+                    iniciarSesion(user, contrasenia);
+                    break;
+                default:
+                    System.out.println("Opcion Incorrecta")
+                    break;
+            }
+        }while(opcion!=2);        
+        }
+    }
+
+    /**
+     * Este metodo agrega las Personas de un .txt a un ArrayList
+     * @param usuarios un .txt con todas las personas que acceden al programa
+     **/
     public static void agregarPersonas(String usuarios){
         personas = new ArrayList<>();
         File archivo = null;
@@ -59,22 +90,11 @@ public class Aplicacion {
         }
     }
 
-    public static void ejecutarAplicacion(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Someter Articulo: 1 \n Iniciar Sesion: 2 \n Escriba la opcion que desea realizar:");
-        int opcion = sc.nextInt();
-        sc.nextLine();
-        if (opcion == 1){
-
-        }else if(opcion ==2){
-            System.out.println("Ingrese su User: ");
-            String user = sc.nextLine();
-            System.out.println("Ingrese su contraseña: ");
-            String contrasenia = sc.nextLine();
-            iniciarSesion(user, contrasenia);
-        }
-    }
-
+    /**
+     * Este metodo permite iniciar sesion a un Editor o Revisor
+     * @param user Con este usuario accede al programa y se lo busca
+     * @param contrasenia Con esta contraseña accede al programa y se lo busca
+     */
     public static void iniciarSesion(String user, String contrasenia){
          for (Persona e: personas){
             if(e instanceof Revisor){
@@ -83,6 +103,7 @@ public class Aplicacion {
                     System.out.println("Revision de aritculo");
                     String linea = revi.getNombre() +","+ revi.getApellido()+","+ revi.getCorreo()+","+revi.getRol()+","+revi.getEspecialidad()+","+revi.getUser()+","+ revi.getContrasenia()+","+revi.getArticulosRevisados();
                     guardarDatos("revisores", linea);
+                    
                 }
 
             }else if(e instanceof Editor){
@@ -96,6 +117,9 @@ public class Aplicacion {
          }
     }
 
+    /**
+     * Este metodo permite al Autor registrar sus datos, los datos de su articulo y someterlo a revision
+     */
     public static void someterArticulo(){
         Scanner sc = new Scanner(System.in);
         Usuario rol = Usuario.valueOf("AUTOR");
@@ -130,6 +154,11 @@ public class Aplicacion {
 
     }
 
+    /**
+     * Este metodo guarda los datos en una archivo .txt
+     * @param nombreArchivo El nombre del archivo .txt donde se guardaran los datos
+     * @param linea Los datos que se desean guardar
+     */
     public static void guardarDatos(String nombreArchivo,String linea){
         FileWriter fichero = null;
         BufferedWriter bw = null;
