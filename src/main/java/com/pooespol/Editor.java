@@ -6,10 +6,9 @@ public class Editor extends Persona{
     protected String user;
 
     public editor(String nombre, String apellido, String correo, String journal, String contrasena, String user, usuario rol) {
-        super(nombre, apellido, correo);
+        super(nombre, apellido, correo, rol);
         this.journal = journal;
         this.contrasena = contrasena;
-        this.rol = rol;
         this.user = user;
     }
 
