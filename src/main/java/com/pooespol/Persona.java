@@ -5,12 +5,14 @@ public abstract class Persona {
     protected String apellido;
     protected String correo;
     protected Usuario rol;
+    protected String contraseniaCorreo;
 
-    public Persona(String nombre, String apellido, String correo, Usuario rol){
+    public Persona(String nombre, String apellido, String correo, Usuario rol,String contraseniaCorreo){
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.rol = rol;
+        this.contraseniaCorreo = contraseniaCorreo;
     }
 
     public String getNombre(){
@@ -29,6 +31,10 @@ public abstract class Persona {
         return rol;
     }
 
+    public String getcontraseniaCorreo(){
+        return contraseniaCorreo;
+    }
+
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
@@ -43,6 +49,10 @@ public abstract class Persona {
 
     public void setRol(Usuario rol){
         this.rol = rol;
+    }
+
+    public void setContraseniaCorreo(String contraseniaCorreo){
+        this.contraseniaCorreo = contraseniaCorreo;
     }
 
 

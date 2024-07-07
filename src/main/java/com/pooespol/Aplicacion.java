@@ -9,6 +9,11 @@ import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 public class Aplicacion {
     public static ArrayList<Persona> personas;
@@ -33,7 +38,7 @@ public class Aplicacion {
                     iniciarSesion(user, contrasenia);
                     break;
                 default:
-                    System.out.println("Opcion Incorrecta")
+                    System.out.println("Opcion Incorrecta");
                     break;
             }
         }while(opcion!=2);        
@@ -58,22 +63,22 @@ public class Aplicacion {
             String linea;
             while ((linea = br.readLine()) != null){
                 String[] lin = linea.split(",");
-                String nombre = lin[0],apellido = lin[1],correo = lin[2],rol = lin[3];
+                String nombre = lin[0],apellido = lin[1],correo = lin[2],contraseniaCorreo = lin[3], rol = lin[4];
                 if (rol.equals("AUTOR")){
                     Usuario rol1 = Usuario.valueOf(rol);
-                    String institucion = lin[4], campoInvestigacion = lin[5];
-                    Autor autor = new Autor(nombre, apellido, correo, rol1, institucion, campoInvestigacion);
+                    String institucion = lin[5], campoInvestigacion = lin[6];
+                    Autor autor = new Autor(nombre, apellido, correo,contraseniaCorreo, rol1, institucion, campoInvestigacion);
                     personas.add(autor);
                 } else if (rol.equals("REVISOR")){
                     Usuario rol1 = Usuario.valueOf(rol);
-                    String especialidad = lin[4], user=lin[5], contrasenia= lin[6], articulosRevisados =lin[7];
+                    String especialidad = lin[5], user=lin[6], contrasenia= lin[7], articulosRevisados =lin[8];
                     int articulosR= Integer.parseInt(articulosRevisados);
-                    Revisor revisor = new Revisor(nombre, apellido, correo, rol1, especialidad, user, contrasenia,articulosR);               
+                    Revisor revisor = new Revisor(nombre, apellido, correo,contraseniaCorreo, rol1, especialidad, user, contrasenia,articulosR);               
                     personas.add(revisor);
                 }else if(rol.equals("EDITOR")){
                     Usuario rol1 = Usuario.valueOf(rol);
-                    String nombreJournal = lin[4], user = lin[5], contrasenia = lin[6];
-                    Editor editor = new Editor(); //Falta completar 
+                    String nombreJournal = lin[5], user = lin[6], contrasenia = lin[7];
+                    Editor editor = new Editor(nombre, apellido, correo, contraseniaCorreo, nombreJournal, contrasenia, user, rol1);
                     personas.add(editor);
                 }
             }
@@ -129,29 +134,16 @@ public class Aplicacion {
         String apellido = sc.nextLine();
         System.out.println("Ingrese su correo;");
         String correo = sc.nextLine();
+        System.out.println("Ingrese la contraseña de su correo");
+        String contraseniaCorreo = sc.nextLine();
         System.out.println("Ingrese su institucion;");
         String institucion = sc.nextLine();
         System.out.println("Ingrese su campo de investicacion;");
         String campoInvestigacion = sc.nextLine();
         String linea = nombre+","+apellido+","+correo+","+rol+","+institucion+","+campoInvestigacion;
         guardarDatos("autores", linea);
-        Autor autor2 = new Autor(nombre, apellido, correo, rol, institucion, campoInvestigacion);
-        Articulo arti = null;
-        for(Persona e : personas){
-            if(e instanceof Autor){
-                Autor autor =(Autor)e;
-                if(autor.equals(autor2)){
-                    arti = autor.creaArticulo();
-                } else{
-                    personas.add(autor2);
-                }
-                
-            }
-        }
-        String linea2 = arti.getTitulo()+"," +arti.getResumen()+","+arti.getContenido()+","+arti.getPalabrasClave()+","+arti.getAutor();
-        guardarDatos("articulos", linea2);
-        autor.enviarArticulo();
-
+        Autor autor2 = new Autor(nombre, apellido, correo,contraseniaCorreo, rol, institucion, campoInvestigacion);
+        autor2.enviarArticulo();
     }
 
     /**
@@ -181,7 +173,37 @@ public class Aplicacion {
         }
     }
 
-    public static void enviarCorreos(){
+    /**
+     * Este metodo permite enviar correos
+     * @param p1 La persona (Autor,Reviro o Editor) que desea enviar el correo
+     * @param p2 La persona (Autor,Reviro o Editor) que recibe el correo
+     * @param asunto El asunto del cual tratara el correo
+     * @param cuerpo El mensaje que contiene el cuerpo
+     */
+    public static void enviarCorreos(Persona p1, Persona p2,String asunto, Articulo articulo){
+        Scanner sc = new Scanner(System.in);
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.pooespol.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(p1.getCorreo(),p1.getcontraseniaCorreo());
+            }
+        });
+
+        try{
+            Message mensaje = new MimeMessage(session);
+            mensaje.setFrom(new InternetAddress(p2.getCorreo()));
+            mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(p2.getCorreo()));
+            mensaje.setSubject(asunto);
+            mensaje.setText(articulo.toString());
+            Transport.send(mensaje);
+        }catch (MessagingException e){
+            throw new RuntimeException(e);
+        }
 
     }
 }

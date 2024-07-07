@@ -10,21 +10,14 @@ public class Articulo {
     private Autor autor;
     private ArrayList<Boolean> aceptacion;
 
-    public Articulo(int codigoId, String titulo, String resumen, String contenido, ArrayList<String> palabrasClaves, Autor autor, ArrayList<Boolean> aceptacion) {
-        this.codigoId = codigoId;
+    public Articulo(String titulo, String resumen, String contenido, ArrayList<String> palabrasClaves, Autor autor) {
         this.titulo = titulo;
         this.resumen = resumen;
         this.contenido = contenido;
         this.palabrasClaves = palabrasClaves;
         this.autor = autor;
-        this.aceptacion = aceptacion;
-    }
-    public int getCodigoId() {
-        return codigoId;
-    }
-
-    public void setCodigoId(int codigoId) {
-        this.codigoId = codigoId;
+        aceptacion = new ArrayList<>();
+        codigoId ++;
     }
 
     public String getTitulo() {
@@ -59,11 +52,11 @@ public class Articulo {
         this.palabrasClaves = palabrasClaves;
     }
 
-    public autor getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(autor autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 

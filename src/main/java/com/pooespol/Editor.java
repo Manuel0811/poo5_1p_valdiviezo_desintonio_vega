@@ -5,19 +5,19 @@ public class Editor extends Persona{
     private String contrasenia;
     protected String user;
 
-    public editor(String nombre, String apellido, String correo, String journal, String contrasena, String user, usuario rol) {
-        super(nombre, apellido, correo, rol);
+    public Editor(String nombre, String apellido, String correo,String contraseniaCorreo, String journal, String contrasena, String user, Usuario rol) {
+        super(nombre,apellido,correo,rol,contraseniaCorreo);
         this.journal = journal;
-        this.contrasena = contrasena;
+        this.contrasenia = contrasena;
         this.user = user;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setContraseña(String contrasena) {
-        this.contrasena = contrasena;
+    public void setContraseña(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public void setJournal(String journal) {
@@ -36,11 +36,11 @@ public class Editor extends Persona{
         return user;
     }
 
-    public void setRol(usuario rol) {
+    public void setRol(Usuario rol) {
         this.rol = rol;
     }
 
-    public usuario getRol() {
+    public Usuario getRol() {
         return rol;
     }
 }
