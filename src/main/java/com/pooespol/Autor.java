@@ -37,9 +37,9 @@ public class Autor extends Persona{
             }else{
                 return false;
             }
-        }else[
+        }else{
             return false;
-        ]
+        }
     }
 
     public Articulo creaArticulo(){
