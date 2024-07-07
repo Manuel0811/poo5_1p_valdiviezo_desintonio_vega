@@ -35,12 +35,4 @@ public class Editor extends Persona{
     public String getUser() {
         return user;
     }
-
-    public void setRol(usuario rol) {
-        this.rol = rol;
-    }
-
-    public usuario getRol() {
-        return rol;
-    }
 }
