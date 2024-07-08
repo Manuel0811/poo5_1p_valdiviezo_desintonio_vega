@@ -42,7 +42,32 @@ public class Autor extends Persona{
         }
     }
 
-    public Articulo creaArticulo(){
+    public Articulo creaArticulo(Autor autor){
+
+        System.out.println("Ingrese el Codigo ID");
+        int codId = sc.nextInt();
+      
+        System.out.println("Ingrese el Titulo");
+        String titulo = sc.nextLine();
+       
+        System.out.println("Ingrese el Resumen");
+        String res =sc.nextLine();
+       
+        System.out.println("Ingrese el contenido");
+        String cont =sc.nextLine();
+        
+        System.out.println("Ingrese cuantas palabras clave va a insertar");
+        int nPalabras = sc.nextInt();
+        ArrayList <String> palClaves = new ArrayList<String>();
+        for(int i=1;i<=nPalabras;i++){
+            System.out.println("Ingrese la palabra clave N° "+i);
+            String pal = sc.nextLine();
+            palClaves.add(pal);
+        }
+
+        Articulo art = new Articulo(codId,titulo,res,cont,palClaves,autor);
+
+        return art;
 
     }
 
