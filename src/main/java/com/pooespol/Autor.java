@@ -15,25 +15,42 @@ public class Autor extends Persona{
         CODIGOID++;
     }
     /**
-     * Este metodo permite visualizar la Institucion del Autor
-     * @return El nombre de la INstitucion del autor
+     * Este metodo permite mirar la Institucion del Autor
+     * @return Sera el nombre de la Institucion del Autor
      */
     public String getInstitucion(){
         return institucion;
     }
 
+    /**
+     * Este metodo permite mirar el Campo de Investigacion del Autor
+     * @return Sera el nombre del Campo de Investigacion del Autor
+     */
     public String getCampoInvestigacion(){
         return campoInvestigacion;
     }
 
+    /**
+     * Este metodo permite modificar la Institucion del Autor
+     * @param institucion Sera la nueva Institucion del Autor
+     */
     public void setInstitucion(String institucion){
         this.institucion = institucion;
     }
 
+    /**
+     * Este metodo permite modificar el Campor de Investigacion del Autor
+     * @param campoInvestigacion Sera el nuevo Campo de Investigacion del Autor
+     */
     public void setCampoInvestigacion(String campoInvestigacion){
         this.campoInvestigacion= campoInvestigacion;
     }
     
+     /**
+     * Este metodo compara dos Revisores segun todos sus atributos
+     * @param obj Sera el objeto o revisor con el que se comparara
+     * @return Retornara verdadero si tdoso los atributos son iguales, falso por el contrario
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj)
@@ -48,6 +65,10 @@ public class Autor extends Persona{
         return false;
     }
 
+    /**
+     * Este metodo permite al autor subir un articulo y guardarlo en un archivo .txt
+     * @return retornara el articulo que se creo
+     */
     public Articulo crearArticulo(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingre el titulo del articulo: ");
@@ -73,6 +94,9 @@ public class Autor extends Persona{
 
     }
 
+    /**
+     * Este metodo manda el Articulo que el autor subio a dos Revisores para que tomen la decision de aceptarlo o rechazarlo
+     */
     public void enviarArticulo(){
         Articulo art = this.crearArticulo();
         ArrayList<Revisor> revisores  = new ArrayList<>();

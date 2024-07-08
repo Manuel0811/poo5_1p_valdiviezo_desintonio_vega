@@ -14,38 +14,57 @@ public class Editor extends Persona{
         this.user = user;
     }
 
+    /**
+     * Permite acceder a la contraseña del Editor
+     * @return Retorrna un String de la contrañesa del Editor
+     */
     public String getContrasenia() {
         return contrasenia;
     }
 
+    /**
+     * Este metodo permite modificar la contraseña del Editor
+     * @param contrasenia Sera la nueva contraseña del Editor
+     */
     public void setContraseña(String contrasenia) {
         this.contrasenia = contrasenia;
     }
 
+    /**
+     * Este metodo permite modificar el Journal que trabaja el Editor
+     * @param journal Sera el nuevo Journal del Editor
+     */
     public void setJournal(String journal) {
         this.journal = journal;
     }
 
+    /**
+     * Este metodo permite mirar el Journal que trabaja el Editor
+     * @return Retorna un String del Journal del Editor
+     */
     public String getJournal() {
         return journal;
     }
 
+    /**
+     * Este metodo permite modificar el User del Editor
+     * @param user Sera el nuevo User del Editor
+     */
     public void setUser(String user) {
         this.user = user;
     }
 
+    /**
+     * Este metodo permite mirar el User del Editor
+     * @return Retorna un String del User del Editor
+     */
     public String getUser() {
         return user;
     }
 
-    public void setRol(Usuario rol) {
-        this.rol = rol;
-    }
-
-    public Usuario getRol() {
-        return rol;
-    }
-
+    /**
+     * Este metodo permiter ver las decisiones de los Revisores respecto a un articulo y posteriro tomar la decision de publicarlo o no publicarlo
+     */
     public void decisionFinal(){
         Scanner sc = new Scanner(System.in);
         String mensaje =Aplicacion.leerCorreo(this);

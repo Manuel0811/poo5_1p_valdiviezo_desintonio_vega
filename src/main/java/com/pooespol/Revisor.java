@@ -18,37 +18,75 @@ public class Revisor extends Persona{
         this.articulosRevisados = articulosRevisados;
     }
     
+    /**
+     * Este metodo retornara la Especialidad del Revisor
+     * @return Retorna el String de la Especialidad del Editor
+     */
     public String getEspecialidad(){
         return especialidad;
     }
 
+    /**
+     * Este metodo retornara la Contraseña del Revisor
+     * @return Retornara un String de la Contraseña del Editor
+     */
     public String getContrasenia(){
         return contrasenia;
     }
 
+    /**
+     * Este metodo retornara el User del Revisor
+     * @return Retornara un String del User del Editor
+     */
     public String getUser(){
         return user;
     }
 
+    /**
+     * Este metodo retornara la cantidad de Articulos Revisados del Revisor
+     * @return Retornara un int de la cantidad de Articulos Revisados
+     */
     public int getArticulosRevisados(){
         return articulosRevisados;
     }
     
+    /**
+     * Este metodo permite modificar la Especialidad del Revisor
+     * @param especialidad Sera la nueva especialidad del Revisor
+     */
     public void setEspecialidad(String especialidad){
         this.especialidad = especialidad;
     }
 
+    /**
+     * Este metodo permite modificar la Contraseña del Revisor
+     * @param contrasenia Sera la nueva Contraseña del Revisor
+     */
     public void setContrasenia(String contrasenia){
         this.contrasenia = contrasenia;
     }
 
+    /**
+     * Este metodo permite modificar el User del Revisor
+     * @param user Sera el nuevo User del Revisor
+     */
     public void setUser(String user){
         this.user = user;
     }
+
+    /**
+     * Este metodo permite modificar la cantidad de Articulos Revisados del Revisor
+     * @param articulosRevisados Seran la nueva cantidad de Articulos Revisados
+     */
     public void setArticulosRevisados(int articulosRevisados){
         this.articulosRevisados = articulosRevisados;
     }
     
+    /**
+     * Este metodo compara dos Revisores segun todos sus atributos
+     * @param obj Sera el objeto o revisor con el que se comparara
+     * @return Retornara verdadero si tdoso los atributos son iguales, falso por el contrario
+     */
     @Override
     public boolean equals(Object obj){
         if (this == obj)
@@ -63,7 +101,9 @@ public class Revisor extends Persona{
         return false;    
     }
     
-
+    /**
+     * Con este metodo el Revisor lee el artculo designado y posterior lo acepta o rechaza para que el deitor decida si publicarlo o no
+     */
     public void validarArticulo(){
         Scanner sc = new Scanner(System.in);
         String mensaje =Aplicacion.leerCorreo(this);

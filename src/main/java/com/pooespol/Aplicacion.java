@@ -187,6 +187,11 @@ public class Aplicacion {
         
     }
 
+    /**
+     * Este metodo permite leer los correo que se enviaron a una persona y devuelve el que elijamos leer
+     * @param p1 La persona la cual desea leer el correo
+     * @return El correo que eligio leer
+     */
     public static String leerCorreo(Persona p1){
         String s = "";
         try{
