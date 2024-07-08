@@ -1,7 +1,7 @@
 package com.pooespol;
 
 public class Autor extends Persona{
-    private int CODIGOID;
+    private static int CODIGOID;
     private String institucion;
     private String campoInvestigacion;
 
