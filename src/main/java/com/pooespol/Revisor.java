@@ -43,16 +43,16 @@ public class Revisor extends Persona{
         this.user = user;
     }
 
-    public ArrayList validarArticulo(Articulo articulo){
+    public ArrayList<Boolean> validarArticulo(Articulo articulo){
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> validacion = new ArrayList<>();
         String respuesta = sc.nextLine();
-        if (respuesta.toLowerCase() == "aceptado") {
-            validacion.add(respuesta);
-        } else if (respuesta.toLowerCase() == "rechazado") {
-            validacion.add(respuesta);
+        if (respuesta.toLowerCase().equals("aprobado")) {
+            articulo.aceptacion.add(true);
+        } else if (respuesta.toLowerCase().equals("rechazado")) {
+            articulo.aceptacion.add(false);
         }
-        return validacion;
+        sc.close();
+        return articulo.aceptacion;
     }
     
     
