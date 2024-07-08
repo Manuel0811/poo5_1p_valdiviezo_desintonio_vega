@@ -43,7 +43,17 @@ public class Revisor extends Persona{
         this.user = user;
     }
 
-    //Metodos apartes
+    public ArrayList validarArticulo(Articulo articulo){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> validacion = new ArrayList<>();
+        String respuesta = sc.nextLine();
+        if (respuesta.toLowerCase() == "aceptado") {
+            validacion.add(respuesta);
+        } else if (respuesta.toLowerCase() == "rechazado") {
+            validacion.add(respuesta);
+        }
+        return validacion;
+    }
     
     
 }
