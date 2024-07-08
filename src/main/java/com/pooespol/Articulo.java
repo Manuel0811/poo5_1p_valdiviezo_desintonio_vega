@@ -8,7 +8,7 @@ public class Articulo {
     private String contenido;
     private ArrayList<String> palabrasClaves;
     private Autor autor;
-    private ArrayList<Boolean> aceptacion;
+    public static ArrayList<Boolean> aceptacion;
 
     public Articulo(String titulo, String resumen, String contenido, ArrayList<String> palabrasClaves, Autor autor) {
         this.titulo = titulo;
@@ -60,11 +60,12 @@ public class Articulo {
         this.autor = autor;
     }
 
-    public ArrayList<Boolean> getAceptacion() {
-        return aceptacion;
-    }
-
-    public void setAceptacion(ArrayList<Boolean> aceptacion) {
-        this.aceptacion = aceptacion;
+    public String toString(){
+        String palabras = "";
+        for(String e: palabrasClaves){
+            palabras+= " "+e;
+        }
+        String s= titulo+ "-"+resumen+"-"+contenido+"-"+palabras+"-"+autor.getNombre();
+        return s;
     }
 }

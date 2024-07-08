@@ -45,7 +45,7 @@ public class Autor extends Persona{
             if((nombre.equals(autor2.getNombre())) && (apellido.equals(autor2.getApellido())) && (correo.equals(autor2.getCorreo())) && (institucion.equals(autor2.getInstitucion())) && (campoInvestigacion.equals(autor2.getCampoInvestigacion()))&& (contraseniaCorreo.equals(autor2.getcontraseniaCorreo())))
                 return true;
         }
-        return false;    
+        return false;
     }
 
     public Articulo crearArticulo(){

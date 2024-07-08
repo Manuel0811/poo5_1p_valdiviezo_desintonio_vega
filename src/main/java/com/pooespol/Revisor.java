@@ -1,5 +1,8 @@
 package com.pooespol;
 
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Revisor extends Persona{
     private String especialidad;
     private String user;
@@ -62,5 +65,51 @@ public class Revisor extends Persona{
     }
     
 
-    
+    public void validarArticulo(){
+        Scanner sc = new Scanner(System.in);
+        String mensaje =Aplicacion.leerCorreo(this);
+        System.out.println(mensaje);
+        System.out.println("Desea asignar el articulo a un Editor");
+        System.out.println("1. Aceptar");
+        System.out.println("2. Rechazar");
+        System.out.println("Escriba su opcion: ");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        switch (opcion){
+            case 1:
+                Articulo.aceptacion.add(true);
+                break;
+            case 2:
+                Articulo.aceptacion.add(false);
+                break;
+            default:
+                System.out.println("Opcion Invalida");
+        }
+        String[] articulo = mensaje.split("-");
+        ArrayList<String> palabrasClaves = new ArrayList<>();
+        String[] palabras = articulo[3].split(" ");
+        for(String e: palabras){
+            palabrasClaves.add(e);
+        }
+        String nombreAutor = articulo[4];
+        Autor autor = null;
+        for(Persona e: Aplicacion.personas){
+            if(e instanceof Autor){
+                Autor a1 = (Autor)e;
+                if(nombreAutor.equals(a1.getNombre()));
+                autor = a1;
+            }
+        }
+        Articulo art = new Articulo(articulo[0],articulo[1],articulo[2],palabrasClaves,autor);
+        Editor edi = null;
+        for(Persona e: Aplicacion.personas){
+            if(e instanceof Editor){
+                Editor editor = (Editor)e;
+                edi = editor;
+            }
+        }
+        Aplicacion.enviarCorreos(this, edi, "Publicaion de articulo", art);
+        sc.close();
+    }
+
 }

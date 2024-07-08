@@ -18,33 +18,7 @@ import javax.mail.internet.MimeMessage;
 public class Aplicacion {
     public static ArrayList<Persona> personas;
     
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        //agregarPersonas(usuarios.txt);
-        int opcion = 0;
-        do{
-            System.out.println("Someter Articulo: 1 \n Iniciar Sesion: 2 \n Salir: 3 \n Escriba la opcion que desea realizar:");
-            opcion = sc.nextInt();
-            sc.nextLine();
-            switch (opcion) {
-                case 1:
-                    someterArticulo();
-                    break;
-                case 2:
-                    System.out.println("Ingrese su User: ");
-                    String user = sc.nextLine();
-                    System.out.println("Ingrese su contraseña: ");
-                    String contrasenia = sc.nextLine();
-                    iniciarSesion(user, contrasenia);
-                    break;
-                default:
-                    System.out.println("Opcion Incorrecta");
-                    break;
-            }
-        }while(opcion!=2);        
-        }
-    }
-
+    
     /**
      * Este metodo agrega las Personas de un .txt a un ArrayList
      * @param usuarios un .txt con todas las personas que acceden al programa
@@ -108,7 +82,9 @@ public class Aplicacion {
                     System.out.println("Revision de aritculo");
                     String linea = revi.getNombre() +","+ revi.getApellido()+","+ revi.getCorreo()+","+revi.getRol()+","+revi.getEspecialidad()+","+revi.getUser()+","+ revi.getContrasenia()+","+revi.getArticulosRevisados();
                     guardarDatos("revisores", linea);
-                    
+                    revi.validarArticulo();
+                }else{
+                    System.out.println("Usuario o Contraseña invalido");
                 }
 
             }else if(e instanceof Editor){
@@ -117,6 +93,10 @@ public class Aplicacion {
                     System.out.println("Registro de decision final sobre el articulo");
                     String linea = edi.getNombre(); //Falta completar
                     guardarDatos("editores", linea);
+                    edi.decisionFinal();
+
+                }else{
+                    System.out.println("Usuario o Contraseña invalido");
                 }
             }
          }
@@ -144,6 +124,7 @@ public class Aplicacion {
         guardarDatos("autores", linea);
         Autor autor2 = new Autor(nombre, apellido, correo,contraseniaCorreo, rol, institucion, campoInvestigacion);
         autor2.enviarArticulo();
+        sc.close();
     }
 
     /**
@@ -181,7 +162,6 @@ public class Aplicacion {
      * @param cuerpo El mensaje que contiene el cuerpo
      */
     public static void enviarCorreos(Persona p1, Persona p2,String asunto, Articulo articulo){
-        Scanner sc = new Scanner(System.in);
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.pooespol.com");
         props.put("mail.smtp.port", "587");
@@ -204,6 +184,33 @@ public class Aplicacion {
         }catch (MessagingException e){
             throw new RuntimeException(e);
         }
+        
+    }
 
+    public static String leerCorreo(Persona p1){
+        String s = "";
+        try{
+            Scanner sc = new Scanner(System.in);
+            Properties properties = new Properties();
+            properties.put("mail.imap.host", p1.getNombre());
+            properties.put("mail.imap.port", "993");
+            properties.put("mail.imap.starttls.enable", "true");
+            Session emailSession = Session.getDefaultInstance(properties);
+            Store store = emailSession.getStore("imaps");
+            store.connect(p1.getNombre(),p1.getcontraseniaCorreo());
+            Folder emailFolder = store.getFolder("INBOX");
+            Message[] mensajes = emailFolder.getMessages();
+            System.out.println("Numero de mensajes: "+mensajes.length);
+            System.out.println("Elija cual correo desea leer: ");
+            int opcion = sc.nextInt();
+            sc.nextLine();
+            store.close();
+            sc.close();
+            s = mensajes[opcion].getContent().toString();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return s;
     }
 }
+
