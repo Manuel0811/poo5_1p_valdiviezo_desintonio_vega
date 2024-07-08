@@ -2,7 +2,7 @@ package com.pooespol;
 import java.util.ArrayList;
 
 public class Articulo {
-    public static int codigoId;
+    public int codigoId;
     private  String titulo;
     private String resumen;
     private String contenido;
