@@ -48,6 +48,7 @@ public class Autor extends Persona{
         return false;
     }
 
+<<<<<<< HEAD
     public Articulo crearArticulo(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingre el titulo del articulo: ");
@@ -70,6 +71,35 @@ public class Autor extends Persona{
         String linea = art.toString();
         Aplicacion.guardarDatos("articulos", linea);
         return art;
+=======
+    public Articulo creaArticulo(Autor autor){
+
+        System.out.println("Ingrese el Codigo ID");
+        int codId = sc.nextInt();
+      
+        System.out.println("Ingrese el Titulo");
+        String titulo = sc.nextLine();
+       
+        System.out.println("Ingrese el Resumen");
+        String res =sc.nextLine();
+       
+        System.out.println("Ingrese el contenido");
+        String cont =sc.nextLine();
+        
+        System.out.println("Ingrese cuantas palabras clave va a insertar");
+        int nPalabras = sc.nextInt();
+        ArrayList <String> palClaves = new ArrayList<String>();
+        for(int i=1;i<=nPalabras;i++){
+            System.out.println("Ingrese la palabra clave N° "+i);
+            String pal = sc.nextLine();
+            palClaves.add(pal);
+        }
+
+        Articulo art = new Articulo(codId,titulo,res,cont,palClaves,autor);
+
+        return art;
+
+>>>>>>> 2db3c773ef4ee473a7ec4cb9f4e543cc6c907fb2
     }
 
     public void enviarArticulo(){
