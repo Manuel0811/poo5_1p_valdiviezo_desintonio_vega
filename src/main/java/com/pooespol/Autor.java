@@ -2,6 +2,7 @@ package com.pooespol;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Autor extends Persona{
     public static int CODIGOID;
@@ -87,7 +88,7 @@ public class Autor extends Persona{
             palabrasClaves.add(palabra);
         }
         Articulo art = new Articulo(titulo, resumen, contenido, palabrasClaves, this);
-        sc.close();
+
         String linea = art.toString();
         Aplicacion.guardarDatos("articulos", linea);
         return art;
@@ -98,20 +99,31 @@ public class Autor extends Persona{
      * Este metodo manda el Articulo que el autor subio a dos Revisores para que tomen la decision de aceptarlo o rechazarlo
      */
     public void enviarArticulo(){
+        System.out.println("Vamos a registrar su articulo");
         Articulo art = this.crearArticulo();
+        System.out.println("Articulo creado");
+        System.out.println("Ahora se enviara a dos revisores para su aceptacion");
         ArrayList<Revisor> revisores  = new ArrayList<>();
         Revisor revisor = null;
-        for(Persona e : Aplicacion.personas){
-            if(e instanceof Revisor){
-                Revisor revi = (Revisor)e;
-                if(!revi.equals(revisor)){
-                    revisores.add(revi);
+        Random r = new Random();
+        do{
+            int e = r.nextInt(Aplicacion.personas.size());
+            Persona p = Aplicacion.personas.get(e);
+            if(p instanceof Revisor ){
+                Revisor rev = (Revisor)p;
+                if(!rev.equals(revisor)){
+                    revisores.add(rev);                
                 }
             }
+        }while(revisores.size()<2);
+        for(Revisor i : revisores){
+            Aplicacion.enviarCorreos(this, i, "Revision de Articulo",art);
         }
-        for(Revisor e : revisores){
-            Aplicacion.enviarCorreos(this, e, "Revision de Articulo",art);
-        }
+        System.out.println("Se envio su articulo exitosamente");
+    }
 
+    public String toString(){
+        String s = "Nomre: "+ nombre +" Apellido: "+ apellido+ " Correo: "+correo+" Institucion: "+institucion+" Campo de Invesigacion: "+campoInvestigacion;
+        return s;
     }
 }

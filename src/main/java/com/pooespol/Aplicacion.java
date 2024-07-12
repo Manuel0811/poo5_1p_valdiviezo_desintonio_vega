@@ -17,6 +17,7 @@ import javax.mail.internet.MimeMessage;
 
 public class Aplicacion {
     public static ArrayList<Persona> personas;
+    public static ArrayList<Articulo> articulos = new ArrayList<>();
     
     
     /**
@@ -124,7 +125,7 @@ public class Aplicacion {
         guardarDatos("autores", linea);
         Autor autor2 = new Autor(nombre, apellido, correo,contraseniaCorreo, rol, institucion, campoInvestigacion);
         autor2.enviarArticulo();
-        sc.close();
+
     }
 
     /**
@@ -163,7 +164,7 @@ public class Aplicacion {
      */
     public static void enviarCorreos(Persona p1, Persona p2,String asunto, Articulo articulo){
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.pooespol.com");
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -175,14 +176,15 @@ public class Aplicacion {
         });
 
         try{
-            Message mensaje = new MimeMessage(session);
+            MimeMessage mensaje = new MimeMessage(session);
             mensaje.setFrom(new InternetAddress(p2.getCorreo()));
             mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(p2.getCorreo()));
             mensaje.setSubject(asunto);
             mensaje.setText(articulo.toString());
             Transport.send(mensaje);
+            System.out.println("Mensaje enviado");
         }catch (MessagingException e){
-            throw new RuntimeException(e);
+            
         }
         
     }
@@ -192,8 +194,8 @@ public class Aplicacion {
      * @param p1 La persona la cual desea leer el correo
      * @return El correo que eligio leer
      */
-    public static String leerCorreo(Persona p1){
-        String s = "";
+    public static Articulo leerCorreo(Persona p1){
+        Articulo art = null;
         try{
             Scanner sc = new Scanner(System.in);
             Properties properties = new Properties();
@@ -210,12 +212,28 @@ public class Aplicacion {
             int opcion = sc.nextInt();
             sc.nextLine();
             store.close();
-            sc.close();
-            s = mensajes[opcion].getContent().toString();
+            String s = mensajes[opcion].getContent().toString();
+            String[] articulo = s.split("-");
+            ArrayList<String> palabrasClaves = new ArrayList<>();
+            Autor autor = null;
+            for(int i =3;i< articulo.length;i++){
+                for(Persona e: personas){
+                    if(e instanceof Autor){
+                        Autor autor2 = (Autor)e;
+                        if(autor2.toString().equals(articulo[i])){
+                            autor = autor2;
+                        }else{
+                            palabrasClaves.add(articulo[i]);
+                        }
+                    }
+                }
+            }
+            art = new Articulo(articulo[0], articulo[1], articulo[2], palabrasClaves, autor);
+
         }catch(Exception e){
             e.printStackTrace();
         }
-        return s;
+        return art;
     }
 }
 

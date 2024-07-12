@@ -8,6 +8,8 @@ public class Main {
         Aplicacion.agregarPersonas("usuarios.txt");
         int opcion = 0;
         do{
+            System.out.println("Bienvenido a la Aplicacion para publicacion de articulos");
+            System.out.println("Escriba el numero de la accion que desea realizar");
             System.out.println("Someter Articulo: 1 \nIniciar Sesion: 2 \nSalir: 3 \nEscriba la opcion que desea realizar:");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -27,5 +29,6 @@ public class Main {
                     break;
             }
         }while(opcion!=3);        
-        }
+        sc.close();
     }
+}

@@ -67,48 +67,39 @@ public class Editor extends Persona{
      */
     public void decisionFinal(){
         Scanner sc = new Scanner(System.in);
-        String mensaje =Aplicacion.leerCorreo(this);
-        System.out.println(mensaje);
-        System.out.println("Desea asignar el articulo a un Editor");
-        System.out.println("1. Aceptar");
-        System.out.println("2. Rechazar");
-        System.out.println("Escriba su opcion: ");
-        int opcion = sc.nextInt();
-        sc.nextLine();
-        switch (opcion){
-            case 1:
-                Articulo.aceptacion.add(true);
-                break;
-            case 2:
-                Articulo.aceptacion.add(false);
-                break;
-            default:
-                System.out.println("Opcion Invalida");
+        Articulo articulo =Aplicacion.leerCorreo(this);
+        System.out.println(articulo);
+        for(Articulo e : Aplicacion.articulos){
+            if(articulo.equals(e)){
+                articulo = e;
+            }
         }
-        for(int i = 0; i<Articulo.aceptacion.size();i++){
-            if(Articulo.aceptacion.get(i)){
+        for(int i = 0; i<articulo.getAceptacion().size();i++){
+            if(articulo.getAceptacion().get(i)){
                 System.out.println("El "+(i+1)+" revisor aprobo el articulo.");
             }else{
                 System.out.println("El "+(i+1)+" revisor rechazo el articulo.");
             }
         }
-        System.out.println("Decision Final");
-        System.out.println("1. Publicar");
-        System.out.println("2. No Publicar");   
-        System.out.println("Escriba su decision: ");
-        int decision = sc.nextInt();
-        sc.nextLine();
-        switch (decision) {
-            case 1:
-                System.out.println("El articulo sera publicado");
-                break;
-            case 2:
-                System.out.println("El articulo no sera publicado");
-                break;
-            default:
-                System.out.println("Opcion invalida");
-                break;
-        }
-        sc.close();
+        int decision = 0;
+        do{
+            System.out.println("Decision Final");
+            System.out.println("1. Publicar");
+            System.out.println("2. No Publicar");   
+            System.out.println("Escriba su decision: ");
+            decision = sc.nextInt();
+            sc.nextLine();
+            switch (decision) {
+                case 1:
+                    System.out.println("El articulo sera publicado");
+                    break;
+                case 2:
+                    System.out.println("El articulo no sera publicado");
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
+                    break;
+            }
+        }while((decision!=1)&&(decision!=2));
     }
 }

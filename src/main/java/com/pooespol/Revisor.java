@@ -1,7 +1,7 @@
 package com.pooespol;
 
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.Random;
 
 public class Revisor extends Persona{
     private String especialidad;
@@ -106,49 +106,46 @@ public class Revisor extends Persona{
      */
     public void validarArticulo(){
         Scanner sc = new Scanner(System.in);
-        String mensaje =Aplicacion.leerCorreo(this);
-        System.out.println(mensaje);
-        System.out.println("Desea asignar el articulo a un Editor");
-        System.out.println("1. Aceptar");
-        System.out.println("2. Rechazar");
-        System.out.println("Escriba su opcion: ");
-        int opcion = sc.nextInt();
-        sc.nextLine();
-        switch (opcion){
-            case 1:
-                Articulo.aceptacion.add(true);
-                break;
-            case 2:
-                Articulo.aceptacion.add(false);
-                break;
-            default:
-                System.out.println("Opcion Invalida");
-        }
-        String[] articulo = mensaje.split("-");
-        ArrayList<String> palabrasClaves = new ArrayList<>();
-        String[] palabras = articulo[3].split(" ");
-        for(String e: palabras){
-            palabrasClaves.add(e);
-        }
-        String nombreAutor = articulo[4];
-        Autor autor = null;
-        for(Persona e: Aplicacion.personas){
-            if(e instanceof Autor){
-                Autor a1 = (Autor)e;
-                if(nombreAutor.equals(a1.getNombre()));
-                autor = a1;
+        Articulo articulo =Aplicacion.leerCorreo(this);
+        System.out.println(articulo);
+        for(Articulo e : Aplicacion.articulos){
+            if(articulo.equals(e)){
+                articulo = e;
             }
         }
-        Articulo art = new Articulo(articulo[0],articulo[1],articulo[2],palabrasClaves,autor);
+        int opcion =0;
+        do{
+            System.out.println("Desea asignar el articulo a un Editor");
+            System.out.println("1. Aceptar");
+            System.out.println("2. Rechazar");
+            System.out.println("Escriba su opcion: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion){
+                case 1:
+                    articulo.getAceptacion().add(true);
+                    System.out.println("Asignacion Aceptada");
+                    break;
+                case 2:
+                    articulo.getAceptacion().add(false);
+                    System.out.println("Asignacion Rechazada");
+                    break;
+                default:
+                    System.out.println("Opcion Invalida");
+            }
+        }while((opcion!=1) && (opcion!=2) );
         Editor edi = null;
-        for(Persona e: Aplicacion.personas){
-            if(e instanceof Editor){
-                Editor editor = (Editor)e;
+        Random r = new Random();
+        do{
+            int e = r.nextInt(Aplicacion.personas.size());
+            Persona p = Aplicacion.personas.get(e);
+            if(p instanceof Editor ){
+                Editor editor = (Editor)p;
                 edi = editor;
             }
-        }
-        Aplicacion.enviarCorreos(this, edi, "Publicaion de articulo", art);
-        sc.close();
+        }while(edi== null);
+        Aplicacion.enviarCorreos(this, edi, "Publicaion de articulo", articulo);
+        System.out.println("Hemos enviado el articulo al Editor");
     }
     
     
