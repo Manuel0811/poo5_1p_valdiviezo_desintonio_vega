@@ -49,8 +49,6 @@ public class Aplicacion {
                     String especialidad = lin[4], user=lin[5], contrasenia= lin[6], articulosRevisados =lin[7];
                     int articulosR= Integer.parseInt(articulosRevisados);
                     Revisor revisor = new Revisor(nombre, apellido, correo, rol1, especialidad, user, contrasenia,articulosR);               
-                    System.out.println(revisor.getContrasenia());
-                    System.out.println(revisor.getUser());
                     personas.add(revisor);
                 }else if(rol.equals("EDITOR")){
                     Usuario rol1 = Usuario.valueOf(rol);
