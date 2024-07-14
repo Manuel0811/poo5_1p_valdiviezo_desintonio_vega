@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 
 public class Aplicacion {
     public static ArrayList<Persona> personas;
-    public static ArrayList<Articulo> articulos = new ArrayList<>();
+    public static ArrayList<Articulo> articulos;
     
     
     /**
@@ -80,7 +80,7 @@ public class Aplicacion {
             if(e instanceof Revisor){
                 Revisor revi= (Revisor)e;
                 if((user.equals(revi.getUser())) && (contrasenia.equals(revi.getContrasenia()))){
-                    System.out.println("Revision de aritculo");
+                    System.out.println("Revision de articulo");
                     String linea = revi.getNombre() +","+ revi.getApellido()+","+ revi.getCorreo()+","+revi.getRol()+","+revi.getEspecialidad()+","+revi.getUser()+","+ revi.getContrasenia()+","+revi.getArticulosRevisados();
                     guardarDatos("revisores", linea);
                     revi.validarArticulo();

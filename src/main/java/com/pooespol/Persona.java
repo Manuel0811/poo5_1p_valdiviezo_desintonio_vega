@@ -55,23 +55,42 @@ public abstract class Persona {
         return contraseniaCorreo;
     }
 
-    
+    /**
+     * Este metodo permite modificar el Nombre de la Persona
+     * @param nombre recibe el nuevo Nombre de la Persona
+     */
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
 
+    /**
+     * Este metodo permite modificar el Apellido de la Persona
+     * @param apellido recibe el nuevo Apellido de la Persona
+     */
     public void setApellido(String apellido){
         this.apellido = apellido;
     }
-
+    
+    /**
+     * Este metodo permite modificar el Correo de la Persona
+     * @param correo recibe el nuevo Correo de la Persona
+     */
     public void setCorreo(String correo){
         this.correo = correo;
     }
 
+    /** 
+     * Este metodo permite modificar el Rol de la Persona
+     * @param rol recibe el nuevo Rol de la Persona
+    */
     public void setRol(Usuario rol){
         this.rol = rol;
     }
 
+    /**
+     * Este metodo permite modificar la Contraseña del Correo de la Persona
+     * @param contraseniaCorreo recibe la nueva Contraseña del Correo de la Persona
+     */
     public void setContraseniaCorreo(String contraseniaCorreo){
         this.contraseniaCorreo = contraseniaCorreo;
     }

@@ -91,6 +91,8 @@ public class Autor extends Persona{
 
         String linea = art.toString();
         Aplicacion.guardarDatos("articulos", linea);
+        Aplicacion.articulos = new ArrayList<>();
+        Aplicacion.articulos.add(art);
         return art;
 
     }
