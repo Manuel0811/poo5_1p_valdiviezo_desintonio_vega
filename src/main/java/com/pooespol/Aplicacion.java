@@ -38,22 +38,22 @@ public class Aplicacion {
             String linea;
             while ((linea = br.readLine()) != null){
                 String[] lin = linea.split(",");
-                String nombre = lin[0],apellido = lin[1],correo = lin[2],contraseniaCorreo = lin[3], rol = lin[4];
+                String nombre = lin[0],apellido = lin[1],correo = lin[2], rol = lin[3];
                 if (rol.equals("AUTOR")){
                     Usuario rol1 = Usuario.valueOf(rol);
-                    String institucion = lin[5], campoInvestigacion = lin[6];
-                    Autor autor = new Autor(nombre, apellido, correo,contraseniaCorreo, rol1, institucion, campoInvestigacion);
+                    String institucion = lin[4], campoInvestigacion = lin[5];
+                    Autor autor = new Autor(nombre, apellido, correo, rol1, institucion, campoInvestigacion);
                     personas.add(autor);
                 } else if (rol.equals("REVISOR")){
                     Usuario rol1 = Usuario.valueOf(rol);
-                    String especialidad = lin[5], user=lin[6], contrasenia= lin[7], articulosRevisados =lin[8];
+                    String especialidad = lin[4], user=lin[5], contrasenia= lin[6], articulosRevisados =lin[7];
                     int articulosR= Integer.parseInt(articulosRevisados);
-                    Revisor revisor = new Revisor(nombre, apellido, correo,contraseniaCorreo, rol1, especialidad, user, contrasenia,articulosR);               
+                    Revisor revisor = new Revisor(nombre, apellido, correo, rol1, especialidad, user, contrasenia,articulosR);               
                     personas.add(revisor);
                 }else if(rol.equals("EDITOR")){
                     Usuario rol1 = Usuario.valueOf(rol);
-                    String nombreJournal = lin[5], user = lin[6], contrasenia = lin[7];
-                    Editor editor = new Editor(nombre, apellido, correo, contraseniaCorreo, nombreJournal, contrasenia, user, rol1);
+                    String nombreJournal = lin[4], user = lin[5], contrasenia = lin[6];
+                    Editor editor = new Editor(nombre, apellido, correo, nombreJournal, contrasenia, user, rol1);
                     personas.add(editor);
                 }
             }
@@ -115,15 +115,13 @@ public class Aplicacion {
         String apellido = sc.nextLine();
         System.out.println("Ingrese su correo;");
         String correo = sc.nextLine();
-        System.out.println("Ingrese la contraseña de su correo");
-        String contraseniaCorreo = sc.nextLine();
         System.out.println("Ingrese su institucion;");
         String institucion = sc.nextLine();
         System.out.println("Ingrese su campo de investicacion;");
         String campoInvestigacion = sc.nextLine();
         String linea = nombre+","+apellido+","+correo+","+rol+","+institucion+","+campoInvestigacion;
         guardarDatos("autores", linea);
-        Autor autor2 = new Autor(nombre, apellido, correo,contraseniaCorreo, rol, institucion, campoInvestigacion);
+        Autor autor2 = new Autor(nombre, apellido, correo, rol, institucion, campoInvestigacion);
         autor2.enviarArticulo();
 
     }
@@ -188,62 +186,6 @@ public class Aplicacion {
             
         }
         
-    }
-
-    /**
-     * Este metodo permite leer los correo que se enviaron a una persona y devuelve el que elijamos leer
-     * @param p1 La persona la cual desea leer el correo
-     * @return El correo que eligio leer
-     */
-    public static Articulo leerCorreo(Persona p1){
-        Articulo art = null;
-        try{
-            Scanner sc = new Scanner(System.in);
-            Properties properties = new Properties();
-            properties.put("mail.store.protocol","stmp")
-            properties.put("mail.imap.host", "stmp.gmail.com");
-            properties.put("mail.imap.port", "993");
-            properties.put("mial.iamps.ssl.trust","*");
-            //properties.put("mail.imap.starttls.enable", "true");
-
-            String contrasenia = "antd iwne zsqf hmji";
-            Session emailSession = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(p1.getCorreo(), contrasenia);
-                }
-            });
-
-            Store store = emailSession.getStore("imaps");
-            store.connect("stmp.gmail.com",p1.getCorreo(),contrasenia);
-            Folder emailFolder = store.getFolder("INBOX");
-            Message[] mensajes = emailFolder.getMessages();
-            System.out.println("Numero de mensajes: "+mensajes.length);
-            System.out.println("Elija cual correo desea leer: ");
-            int opcion = sc.nextInt();
-            sc.nextLine();
-            store.close();
-            String s = mensajes[opcion].getContent().toString();
-            String[] articulo = s.split("-");
-            ArrayList<String> palabrasClaves = new ArrayList<>();
-            Autor autor = null;
-            for(int i =3;i< articulo.length;i++){
-                for(Persona e: personas){
-                    if(e instanceof Autor){
-                        Autor autor2 = (Autor)e;
-                        if(autor2.toString().equals(articulo[i])){
-                            autor = autor2;
-                        }else{
-                            palabrasClaves.add(articulo[i]);
-                        }
-                    }
-                }
-            }
-            art = new Articulo(articulo[0], articulo[1], articulo[2], palabrasClaves, autor);
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return art;
     }
 }
 

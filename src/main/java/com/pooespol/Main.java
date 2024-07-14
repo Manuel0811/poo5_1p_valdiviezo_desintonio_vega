@@ -1,11 +1,13 @@
 package com.pooespol;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         Aplicacion.agregarPersonas("usuarios.txt");
+        Aplicacion.articulos = new ArrayList<>();
         int opcion = 0;
         do{
             System.out.println("Bienvenido a la Aplicacion para publicacion de articulos");
@@ -25,7 +27,7 @@ public class Main {
                     Aplicacion.iniciarSesion(user, contrasenia);
                     break;
                 default:
-                    System.out.println("Opcion Incorrecta");
+                    System.out.println("Saliendo de la Aplicacion");
                     break;
             }
         }while(opcion!=3);        

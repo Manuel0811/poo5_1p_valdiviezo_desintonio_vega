@@ -9,8 +9,8 @@ public class Autor extends Persona{
     private String institucion;
     private String campoInvestigacion;
 
-    public Autor(String nombre, String apellido, String correo,String contraseniaCorreo,Usuario rol, String institucion, String campoInvestigacion){
-        super(nombre,apellido,correo,rol,contraseniaCorreo);
+    public Autor(String nombre, String apellido, String correo,Usuario rol, String institucion, String campoInvestigacion){
+        super(nombre,apellido,correo,rol);
         this.institucion = institucion;
         this.campoInvestigacion = campoInvestigacion;
         CODIGOID++;
@@ -60,8 +60,9 @@ public class Autor extends Persona{
             return false;
         if (this.getClass() == obj.getClass()){
             Autor autor2 = (Autor)obj;
-            if((nombre.equals(autor2.getNombre())) && (apellido.equals(autor2.getApellido())) && (correo.equals(autor2.getCorreo())) && (institucion.equals(autor2.getInstitucion())) && (campoInvestigacion.equals(autor2.getCampoInvestigacion()))&& (contraseniaCorreo.equals(autor2.getcontraseniaCorreo())))
+            if((nombre.equals(autor2.getNombre())) && (apellido.equals(autor2.getApellido())) && (correo.equals(autor2.getCorreo())) && (institucion.equals(autor2.getInstitucion())) && (campoInvestigacion.equals(autor2.getCampoInvestigacion()))){
                 return true;
+            }
         }
         return false;
     }
@@ -91,7 +92,6 @@ public class Autor extends Persona{
 
         String linea = art.toString();
         Aplicacion.guardarDatos("articulos", linea);
-        Aplicacion.articulos = new ArrayList<>();
         Aplicacion.articulos.add(art);
         return art;
 
@@ -125,7 +125,7 @@ public class Autor extends Persona{
     }
 
     public String toString(){
-        String s = "Nomre: "+ nombre +" Apellido: "+ apellido+ " Correo: "+correo+" Institucion: "+institucion+" Campo de Invesigacion: "+campoInvestigacion;
+        String s = "\nNomre: "+ nombre +" \nApellido: "+ apellido+ " \nCorreo: "+correo+" \nInstitucion: "+institucion+" \nCampo de Invesigacion: "+campoInvestigacion;
         return s;
     }
 }

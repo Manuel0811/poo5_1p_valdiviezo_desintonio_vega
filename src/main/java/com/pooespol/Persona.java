@@ -5,14 +5,12 @@ public abstract class Persona {
     protected String apellido;
     protected String correo;
     protected Usuario rol;
-    protected String contraseniaCorreo;
 
-    public Persona(String nombre, String apellido, String correo, Usuario rol,String contraseniaCorreo){
+    public Persona(String nombre, String apellido, String correo, Usuario rol){
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.rol = rol;
-        this.contraseniaCorreo = contraseniaCorreo;
     }
 
     /**
@@ -48,14 +46,6 @@ public abstract class Persona {
     }
 
     /**
-     * Este metodo permite mirar la Contraseña del Correo de la Persona
-     * @return Retornara el String de la Contraseña del Correo de la Persona
-     */
-    public String getcontraseniaCorreo(){
-        return contraseniaCorreo;
-    }
-
-    /**
      * Este metodo permite modificar el Nombre de la Persona
      * @param nombre recibe el nuevo Nombre de la Persona
      */
@@ -85,14 +75,6 @@ public abstract class Persona {
     */
     public void setRol(Usuario rol){
         this.rol = rol;
-    }
-
-    /**
-     * Este metodo permite modificar la Contraseña del Correo de la Persona
-     * @param contraseniaCorreo recibe la nueva Contraseña del Correo de la Persona
-     */
-    public void setContraseniaCorreo(String contraseniaCorreo){
-        this.contraseniaCorreo = contraseniaCorreo;
     }
 
 
