@@ -1,4 +1,4 @@
-Juan,Valdez,juanv@gmail.com,juanv123,AUTOR,Espol,Matematicas
-Pedro,Lopez,plopez@gmail.com,plopez123,REVISOR,Ciencias,plop,lopez12,20
-Pablo,Sanchez,sanchezp@gmail.com,sanchezp123,EDITOR,CienciaPol,sanp,pablo123
-Mateo,Miranda,mirandm@gmail.com,miranda123,REVISOR,Matematicas,miram,mateo123,30
+Juan,Valdez,juanv@outlook.com,juanv123,AUTOR,Espol,Matematicas
+Pedro,Lopez,plopez@outlook.com,plopez123,REVISOR,Ciencias,plop,lopez12,20
+Pablo,Sanchez,sanchezp@outlook.com,sanchezp123,EDITOR,CienciaPol,sanp,pablo123
+Mateo,Miranda,mirandm@outlook.com,miranda123,REVISOR,Matematicas,miram,mateo123,30

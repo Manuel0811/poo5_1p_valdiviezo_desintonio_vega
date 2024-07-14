@@ -165,13 +165,14 @@ public class Aplicacion {
     public static void enviarCorreos(Persona p1, Persona p2,String asunto, Articulo articulo){
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.ssl.trust","smtp.gmail.com");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-
+        String contrasenia = "antd iwne zsqf hmji";
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication(){
-                return new PasswordAuthentication(p1.getCorreo(),p1.getcontraseniaCorreo());
+                return new PasswordAuthentication(p1.getCorreo(),contrasenia);
             }
         });
 
@@ -199,12 +200,21 @@ public class Aplicacion {
         try{
             Scanner sc = new Scanner(System.in);
             Properties properties = new Properties();
-            properties.put("mail.imap.host", p1.getNombre());
+            properties.put("mail.store.protocol","stmp")
+            properties.put("mail.imap.host", "stmp.gmail.com");
             properties.put("mail.imap.port", "993");
-            properties.put("mail.imap.starttls.enable", "true");
-            Session emailSession = Session.getDefaultInstance(properties);
+            properties.put("mial.iamps.ssl.trust","*");
+            //properties.put("mail.imap.starttls.enable", "true");
+
+            String contrasenia = "antd iwne zsqf hmji";
+            Session emailSession = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(p1.getCorreo(), contrasenia);
+                }
+            });
+
             Store store = emailSession.getStore("imaps");
-            store.connect(p1.getNombre(),p1.getcontraseniaCorreo());
+            store.connect("stmp.gmail.com",p1.getCorreo(),contrasenia);
             Folder emailFolder = store.getFolder("INBOX");
             Message[] mensajes = emailFolder.getMessages();
             System.out.println("Numero de mensajes: "+mensajes.length);
