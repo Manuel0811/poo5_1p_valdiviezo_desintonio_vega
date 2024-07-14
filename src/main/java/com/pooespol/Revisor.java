@@ -108,45 +108,49 @@ public class Revisor extends Persona{
     public void validarArticulo(){
         Scanner sc = new Scanner(System.in);
         ArrayList<Articulo> articulos =Aplicacion.articulos;
-        for(Articulo e :articulos){
-            System.out.println("Articulo por designar");
-            System.out.println(e);
-            int opcion =0;
-            do{
-                System.out.println("Desea asignar el articulo a un Editor");
-                System.out.println("1. Aceptar");
-                System.out.println("2. Rechazar");
-                System.out.println("Escriba su opcion: ");
-                opcion = sc.nextInt();
-                sc.nextLine();
-                switch (opcion){
-                    case 1:
-                        e.getAceptacion().add(true);
-                        System.out.println("Asignacion Aceptada");
-                        break;
-                    case 2:
-                        e.getAceptacion().add(false);
-                        System.out.println("Asignacion Rechazada");
-                        break;
-                    default:
-                        System.out.println("Opcion Invalida");
-                }
-            }while((opcion!=1) && (opcion!=2) );
-            Editor edi = null;
-            Random r = new Random();
-            do{
-                int i = r.nextInt(Aplicacion.personas.size());
-                Persona p = Aplicacion.personas.get(i);
-                if(p instanceof Editor ){
-                    Editor editor = (Editor)p;
-                    edi = editor;
-                }
-            }while(edi== null);
-            Aplicacion.enviarCorreos(this, edi, "Publicaion de articulo", e);
-            System.out.println("Hemos enviado el articulo al Editor");
-            System.out.println("Siguiente Articulo por asignar");
+        if(articulos.size() == 0){
+            System.out.println("No tiene Articulos por asignar");
+        }else{
+            for(Articulo e :articulos){
+                System.out.println("Articulo por designar");
+                System.out.println(e);
+                int opcion =0;
+                do{
+                    System.out.println("Desea asignar el articulo a un Editor");
+                    System.out.println("1. Aceptar");
+                    System.out.println("2. Rechazar");
+                    System.out.println("Escriba su opcion: ");
+                    opcion = sc.nextInt();
+                    sc.nextLine();
+                    switch (opcion){
+                        case 1:
+                            e.getAceptacion().add(true);
+                            System.out.println("Asignacion Aceptada");
+                            break;
+                        case 2:
+                            e.getAceptacion().add(false);
+                            System.out.println("Asignacion Rechazada");
+                            break;
+                        default:
+                            System.out.println("Opcion Invalida");
+                    }
+                }while((opcion!=1) && (opcion!=2) );
+                Editor edi = null;
+                Random r = new Random();
+                do{
+                    int i = r.nextInt(Aplicacion.personas.size());
+                    Persona p = Aplicacion.personas.get(i);
+                    if(p instanceof Editor ){
+                        Editor editor = (Editor)p;
+                        edi = editor;
+                    }
+                }while(edi== null);
+                Aplicacion.enviarCorreos(this, edi, "Publicaion de articulo", e);
+                System.out.println("Hemos enviado el articulo al Editor");
+                System.out.println("Siguiente Articulo por asignar");
+            }
+            System.out.println("Ya no hay mas articulos por asignar");
         }
-        System.out.println("Ya no hay mas articulos por asignar");
     }
     
     

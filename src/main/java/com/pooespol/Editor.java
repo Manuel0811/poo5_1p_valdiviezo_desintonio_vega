@@ -69,38 +69,42 @@ public class Editor extends Persona{
     public void decisionFinal(){
         Scanner sc = new Scanner(System.in);
         ArrayList<Articulo> articulos =Aplicacion.articulos;
-        for(Articulo e: articulos){
-            System.out.println("Articulo por publicar");
-            System.out.println(e);
-            for(int i = 0; i<e.getAceptacion().size();i++){
-                if(e.getAceptacion().get(i)){
-                    System.out.println("El "+(i+1)+" revisor aprobo el articulo.");
-                }else{
-                    System.out.println("El "+(i+1)+" revisor rechazo el articulo.");
+        if(articulos.size()==0){
+            System.out.println("No tiene Articulos por publicar");
+        }else{
+            for(Articulo e: articulos){
+                System.out.println("Articulo por publicar");
+                System.out.println(e);
+                for(int i = 0; i<e.getAceptacion().size();i++){
+                    if(e.getAceptacion().get(i)){
+                        System.out.println("El "+(i+1)+" revisor aprobo el articulo.");
+                    }else{
+                        System.out.println("El "+(i+1)+" revisor rechazo el articulo.");
+                    }
                 }
+                int decision = 0;
+                do{
+                    System.out.println("Decision Final");
+                    System.out.println("1. Publicar");
+                    System.out.println("2. No Publicar");   
+                    System.out.println("Escriba su decision: ");
+                    decision = sc.nextInt();
+                    sc.nextLine();
+                    switch (decision) {
+                        case 1:
+                            System.out.println("El articulo sera publicado");
+                            break;
+                        case 2:
+                            System.out.println("El articulo no sera publicado");
+                            break;
+                        default:
+                            System.out.println("Opcion invalida");
+                            break;
+                    }
+                }while((decision!=1)&&(decision!=2));
+                System.out.println("Siguiente Articulo por aprobar");
             }
-            int decision = 0;
-            do{
-                System.out.println("Decision Final");
-                System.out.println("1. Publicar");
-                System.out.println("2. No Publicar");   
-                System.out.println("Escriba su decision: ");
-                decision = sc.nextInt();
-                sc.nextLine();
-                switch (decision) {
-                    case 1:
-                        System.out.println("El articulo sera publicado");
-                        break;
-                    case 2:
-                        System.out.println("El articulo no sera publicado");
-                        break;
-                    default:
-                        System.out.println("Opcion invalida");
-                        break;
-                }
-            }while((decision!=1)&&(decision!=2));
-            System.out.println("Siguiente Articulo por aprobar");
+            System.out.println("Ya no hay mas articulos por aprobar");
         }
-        System.out.println("Ya no hay mas articulos por aprobar");
     }
 }

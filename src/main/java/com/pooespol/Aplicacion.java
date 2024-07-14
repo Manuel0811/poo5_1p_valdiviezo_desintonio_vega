@@ -49,6 +49,8 @@ public class Aplicacion {
                     String especialidad = lin[4], user=lin[5], contrasenia= lin[6], articulosRevisados =lin[7];
                     int articulosR= Integer.parseInt(articulosRevisados);
                     Revisor revisor = new Revisor(nombre, apellido, correo, rol1, especialidad, user, contrasenia,articulosR);               
+                    System.out.println(revisor.getContrasenia());
+                    System.out.println(revisor.getUser());
                     personas.add(revisor);
                 }else if(rol.equals("EDITOR")){
                     Usuario rol1 = Usuario.valueOf(rol);
@@ -76,31 +78,32 @@ public class Aplicacion {
      * @param contrasenia Con esta contraseña accede al programa y se lo busca
      */
     public static void iniciarSesion(String user, String contrasenia){
-         for (Persona e: personas){
+        boolean usuarioEncontrado = false; 
+        for (Persona e: personas){
             if(e instanceof Revisor){
                 Revisor revi= (Revisor)e;
                 if((user.equals(revi.getUser())) && (contrasenia.equals(revi.getContrasenia()))){
+                    usuarioEncontrado = true;
                     System.out.println("Revision de articulo");
                     String linea = revi.getNombre() +","+ revi.getApellido()+","+ revi.getCorreo()+","+revi.getRol()+","+revi.getEspecialidad()+","+revi.getUser()+","+ revi.getContrasenia()+","+revi.getArticulosRevisados();
                     guardarDatos("revisores", linea);
                     revi.validarArticulo();
-                }else{
-                    System.out.println("Usuario o Contraseña invalido");
                 }
-
             }else if(e instanceof Editor){
                 Editor edi = (Editor)e;
                 if((user.equals(edi.getUser())) && (contrasenia.equals(edi.getContrasenia()))){
+                    usuarioEncontrado = true;
                     System.out.println("Registro de decision final sobre el articulo");
-                    String linea = edi.getNombre(); //Falta completar
+                    String linea = edi.getNombre()+","+edi.getApellido()+","+edi.getCorreo()+","+edi.getRol()+","+edi.getJournal()+","+edi.getUser()+","+edi.getContrasenia();
                     guardarDatos("editores", linea);
                     edi.decisionFinal();
-
-                }else{
-                    System.out.println("Usuario o Contraseña invalido");
                 }
             }
-         }
+        }
+        if(!usuarioEncontrado){
+            System.out.println("Usuario o contraseña invalida");
+        }
+
     }
 
     /**
