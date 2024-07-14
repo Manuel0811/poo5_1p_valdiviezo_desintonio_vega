@@ -24,7 +24,9 @@ public class Articulo {
      * Este metodo permite acceder al Titulo del Articulo
      * @return retorna un String con el Titulo del Articulo
      */
-   
+    public String getTitulo() {
+        return titulo;
+    }
 
     /**
      * Este metodo permite modificar el Titulo del Articulo
