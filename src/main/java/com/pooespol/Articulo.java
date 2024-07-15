@@ -17,7 +17,7 @@ public class Articulo {
         this.palabrasClaves = palabrasClaves;
         this.autor = autor;
         aceptacion = new ArrayList<>();
-        codigoId ++;
+        CODIGOID ++;
     }
 
     /**

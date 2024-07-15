@@ -164,7 +164,7 @@ public class Aplicacion {
      * @param p1 La persona (Autor,Reviro o Editor) que desea enviar el correo
      * @param p2 La persona (Autor,Reviro o Editor) que recibe el correo
      * @param asunto El asunto del cual tratara el correo
-     * @param cuerpo El mensaje que contiene el cuerpo
+     * @param articulo El articulo que sera enviado
      */
     public static void enviarCorreos(Persona p1, Persona p2,String asunto, Articulo articulo){
         Properties props = new Properties();
