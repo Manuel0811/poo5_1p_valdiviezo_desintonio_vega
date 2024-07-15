@@ -4,9 +4,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Editor extends Persona{
-    protected String journal;
+    private String journal;
     private String contrasenia;
-    protected String user;
+    private String user;
 
     public Editor(String nombre, String apellido, String correo, String journal, String contrasena, String user, Usuario rol) {
         super(nombre,apellido,correo,rol);

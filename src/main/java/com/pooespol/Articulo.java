@@ -2,7 +2,7 @@ package com.pooespol;
 import java.util.ArrayList;
 
 public class Articulo {
-    public int codigoId;
+    public static int CODIGOID;
     private  String titulo;
     private String resumen;
     private String contenido;
@@ -130,24 +130,5 @@ public class Articulo {
         return s;
     }
 
-    /**
-     * Este metodo permite comparar un Articulo con otro objeto
-     * @param obj recibe un objeto con el se comparara
-     * @return retorna true si el Articulo y el objeto son de la misma clase y sus atriutos son iguales
-     */
-    @Override
-    public boolean equals(Object obj){
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (this.getClass() == obj.getClass()){
-            Articulo articulo2 = (Articulo)obj;
-            if((titulo.equals(articulo2.getTitulo())) && (resumen.equals(articulo2.getResumen())) && (contenido.equals(articulo2.getContenido())) && (autor.toString().equals(articulo2.getAutor().toString()))&&(palabrasClaves.size()==articulo2.palabrasClaves.size())){
-                return true;
-            }
-        }
-        return false;    
-        
-    }
+    
 }

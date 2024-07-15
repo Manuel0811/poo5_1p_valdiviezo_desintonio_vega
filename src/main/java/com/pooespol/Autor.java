@@ -15,6 +15,7 @@ public class Autor extends Persona{
         this.campoInvestigacion = campoInvestigacion;
         CODIGOID++;
     }
+    
     /**
      * Este metodo permite mirar la Institucion del Autor
      * @return Sera el nombre de la Institucion del Autor
