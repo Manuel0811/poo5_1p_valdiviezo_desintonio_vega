@@ -116,6 +116,7 @@ public class Revisor extends Persona{
                 System.out.println(e);
                 int opcion =0;
                 do{
+                    System.out.println("///////////////////////////////////////////////////////////////////////////////");
                     System.out.println("Desea asignar el articulo a un Editor");
                     System.out.println("1. Aceptar");
                     System.out.println("2. Rechazar");

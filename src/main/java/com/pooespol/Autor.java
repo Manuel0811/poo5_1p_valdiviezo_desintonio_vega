@@ -73,13 +73,13 @@ public class Autor extends Persona{
      */
     public Articulo crearArticulo(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Ingre el titulo del articulo: ");
+        System.out.println("Ingrese el titulo del articulo: ");
         String titulo = sc.nextLine();
-        System.out.println("Ingre un resumen del articulo: ");
+        System.out.println("Ingrese un resumen del articulo: ");
         String resumen = sc.nextLine();
-        System.out.println("Ingre el contenido del articulo: ");
+        System.out.println("Ingrese el contenido del articulo: ");
         String contenido = sc.nextLine();
-        System.out.println("Ingre cuantas palabras claves del articulo va a agregar: ");
+        System.out.println("Ingrese cuantas palabras claves del articulo va a agregar: ");
         int cantidad = sc.nextInt();
         sc.nextLine();
         ArrayList<String> palabrasClaves = new ArrayList<>();
@@ -125,7 +125,7 @@ public class Autor extends Persona{
     }
 
     public String toString(){
-        String s = "\nNomre: "+ nombre +" \nApellido: "+ apellido+ " \nCorreo: "+correo+" \nInstitucion: "+institucion+" \nCampo de Invesigacion: "+campoInvestigacion;
+        String s = "\nNombre: "+ nombre +" \nApellido: "+ apellido+ " \nCorreo: "+correo+" \nInstitucion: "+institucion+" \nCampo de Invesigacion: "+campoInvestigacion;
         return s;
     }
 }

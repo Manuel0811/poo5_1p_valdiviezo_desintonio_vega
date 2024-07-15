@@ -84,6 +84,7 @@ public class Editor extends Persona{
                 }
                 int decision = 0;
                 do{
+                    System.out.println("///////////////////////////////////////////////////////////////////////////////");
                     System.out.println("Decision Final");
                     System.out.println("1. Publicar");
                     System.out.println("2. No Publicar");   

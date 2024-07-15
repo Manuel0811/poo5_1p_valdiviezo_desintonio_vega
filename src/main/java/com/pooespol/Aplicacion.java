@@ -76,7 +76,8 @@ public class Aplicacion {
      * @param contrasenia Con esta contraseña accede al programa y se lo busca
      */
     public static void iniciarSesion(String user, String contrasenia){
-        boolean usuarioEncontrado = false; 
+        boolean usuarioEncontrado = false;
+        System.out.println("///////////////////////////////////////////////////////////////////////////////"); 
         for (Persona e: personas){
             if(e instanceof Revisor){
                 Revisor revi= (Revisor)e;
@@ -91,9 +92,11 @@ public class Aplicacion {
                 Editor edi = (Editor)e;
                 if((user.equals(edi.getUser())) && (contrasenia.equals(edi.getContrasenia()))){
                     usuarioEncontrado = true;
+                    System.out.println("///////////////////////////////////////////////////////////////////////////////");
                     System.out.println("Registro de decision final sobre el articulo");
                     String linea = edi.getNombre()+","+edi.getApellido()+","+edi.getCorreo()+","+edi.getRol()+","+edi.getJournal()+","+edi.getUser()+","+edi.getContrasenia();
                     guardarDatos("editores", linea);
+                    System.out.println("///////////////////////////////////////////////////////////////////////////////");
                     edi.decisionFinal();
                 }
             }
@@ -110,6 +113,7 @@ public class Aplicacion {
     public static void someterArticulo(){
         Scanner sc = new Scanner(System.in);
         Usuario rol = Usuario.valueOf("AUTOR");
+        System.out.println("///////////////////////////////////////////////////////////////////////////////");
         System.out.println("Ingrese su nombre;");
         String nombre = sc.nextLine();
         System.out.println("Ingrese su apellido;");
@@ -123,6 +127,7 @@ public class Aplicacion {
         String linea = nombre+","+apellido+","+correo+","+rol+","+institucion+","+campoInvestigacion;
         guardarDatos("autores", linea);
         Autor autor2 = new Autor(nombre, apellido, correo, rol, institucion, campoInvestigacion);
+        System.out.println("///////////////////////////////////////////////////////////////////////////////");
         autor2.enviarArticulo();
 
     }

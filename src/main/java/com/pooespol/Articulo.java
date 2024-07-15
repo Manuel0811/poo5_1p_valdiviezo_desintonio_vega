@@ -123,10 +123,10 @@ public class Articulo {
      */
     public String toString(){
         String palabras = "";
-        for(String e: palabrasClaves){
-            palabras+= " "+e;
+        for(int i =0; i<palabrasClaves.size();i++){
+            palabras+= "\nPalabra "+(i+1)+": "+palabrasClaves.get(i);
         }
-        String s= titulo+ "-"+resumen+"-"+contenido+"-"+palabras+"-"+autor.toString();
+        String s= "Titulo: "+titulo+ "\nResumen: "+resumen+"\nContenido: "+contenido+palabras+"\nAutor:"+autor.toString();
         return s;
     }
 

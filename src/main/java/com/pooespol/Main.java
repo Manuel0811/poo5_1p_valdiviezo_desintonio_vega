@@ -10,6 +10,7 @@ public class Main {
         Aplicacion.articulos = new ArrayList<>();
         int opcion = 0;
         do{
+            System.out.println("///////////////////////////////////////////////////////////////////////////////");
             System.out.println("Bienvenido a la Aplicacion para publicacion de articulos");
             System.out.println("Escriba el numero de la accion que desea realizar");
             System.out.println("Someter Articulo: 1 \nIniciar Sesion: 2 \nSalir: 3 \nEscriba la opcion que desea realizar:");
